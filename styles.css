@@ -95,6 +95,24 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+/* Error gestion */
+
+.error {
+  border: 1px solid red;
+}
+
+.error.input__shape:focus {
+  outline: none;
+  border: 1px solid var(--purple);
+}
+
+.error__message {
+  margin-top: 5px;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(255, 0, 0, 0.7);
+}
+
 /* Submit part */
 
 #submit__container {
@@ -202,5 +220,9 @@ span {
 
   .btn__submit {
     background-size: 40%;
+  }
+
+  span {
+    letter-spacing: 5px;
   }
 }
