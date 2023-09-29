@@ -164,7 +164,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 span {
   color: var(--purple);
-  letter-spacing: 15px;
+  letter-spacing: 5px;
 }
 
 /* Attribution */
@@ -227,6 +227,6 @@ span {
   }
 
   span {
-    letter-spacing: 5px;
+    letter-spacing: 2px;
   }
 }

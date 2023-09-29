@@ -134,7 +134,7 @@ const checkYear = () => {
 
 // Calculate nb of leap years (for having the right amount of days)
 
-const numLeapYears = () => {
+const nbLeapYears = () => {
   const startYear = yearEl.value.trim();
   let yearRange = [];
 
@@ -155,7 +155,89 @@ const numLeapYears = () => {
   return newArray.length;
 };
 
-// Calculate age function
+// Calculate total months and days
+
+const nbMonthsAndDays = (nbDays) => {
+  let monthsAndDays = [];
+
+  let daysPerMonth = nbDaysPerMonth(currentYear);
+
+  // calculates the nber of months remaining
+  for (let months = 0, n = 0; n < nbDays; months++) {
+    n += daysPerMonth[months];
+    monthsAndDays[0] = months;
+  }
+
+  // calculates the nber of days remaining
+  if (monthsAndDays[0] == 0) {
+    monthsAndDays[1] = nbDays;
+  } else {
+    for (let i = 0, days = 0; i < monthsAndDays[0]; i++) {
+      days += daysPerMonth[i];
+      monthsAndDays[1] = nbDays - days;
+    }
+  }
+
+  // return the nber of [months, days]
+  return monthsAndDays;
+};
+
+// Calculate total
+
+let resultYears;
+let resultMonths;
+let resultDays;
+let resultYearsAndMonths;
+
+const calculateTotal = () => {
+  // One day in ms
+  const oneDay = 1000 * 60 * 60 * 24;
+
+  // Nb of leap years
+  const leapYears = nbLeapYears();
+
+  const year = yearEl.value.trim();
+  const month = monthEl.value.trim();
+  const day = dayEl.value.trim();
+
+  // Date provided
+  const inputDate = new Date(year, month - 1, day);
+  // Preferred method; never interprets any value as being a relative offset,
+  // but instead uses the year value as-is
+  inputDate.setFullYear(yearEl.value.trim());
+  // now: 98 is 98 (not 1998)
+
+  // Current date
+  const currentDate = new Date();
+
+  // Calculate the difference in ms
+  let diff = Math.round(currentDate.getTime() - inputDate.getTime());
+
+  if (diff < 0) {
+    showError("day", "Must be in the past");
+  } else {
+    // Nb of days
+    let nbDays = Math.floor(diff / oneDay);
+
+    // W/ leap years
+    nbDays -= leapYears;
+
+    // Nb of years
+    let resultYears = Math.floor(nbDays / 365);
+    nbDays -= +resultYears * 365;
+
+    // Nb of months and days
+    resultYearsAndMonths = nbMonthsAndDays(nbDays);
+
+    let resultMonths = resultYearsAndMonths[0];
+
+    let resultDays = resultYearsAndMonths[1];
+
+    document.getElementById("result__year").textContent = resultYears;
+    document.getElementById("result__month").textContent = resultMonths;
+    document.getElementById("result__day").textContent = resultDays;
+  }
+};
 
 // Submit function
 
@@ -170,6 +252,10 @@ form.addEventListener("submit", function (e) {
 
   if (isFormValid) {
     console.log("Form is valid");
-    // calculateAge();
+    console.log("resultYears:", resultYears);
+    console.log("resultMonths:", resultMonths);
+    console.log("resultDays:", resultDays);
+
+    calculateTotal();
   }
 });
