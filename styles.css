@@ -113,6 +113,10 @@ input[type="number"]::-webkit-outer-spin-button {
   color: rgba(255, 0, 0, 0.7);
 }
 
+.error__label.input__label {
+  color: rgba(255, 0, 0, 0.7);
+}
+
 /* Submit part */
 
 #submit__container {
