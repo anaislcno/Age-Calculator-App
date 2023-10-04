@@ -162,13 +162,13 @@ const nbMonthsAndDays = (nbDays) => {
 
   let daysPerMonth = nbDaysPerMonth(currentYear);
 
-  // calculates the nber of months remaining
+  // Calculates the nber of months remaining
   for (let months = 0, n = 0; n < nbDays; months++) {
     n += daysPerMonth[months];
     monthsAndDays[0] = months;
   }
 
-  // calculates the nber of days remaining
+  // Calculates the nber of days remaining
   if (monthsAndDays[0] == 0) {
     monthsAndDays[1] = nbDays;
   } else {
@@ -178,7 +178,6 @@ const nbMonthsAndDays = (nbDays) => {
     }
   }
 
-  // return the nber of [months, days]
   return monthsAndDays;
 };
 
@@ -246,10 +245,10 @@ const applyAnimation = (elementId, result) => {
   const element = document.getElementById(elementId);
 
   let count = 0;
-  const interval = 30; // Durée de chaque incrémentation en millisecondes
-  const maxCount = result; // La valeur à atteindre
+  const interval = 30; // Duration of incrementation in ms
+  const maxCount = result; // Value to reach
 
-  // La fonction pour animer le compteur
+  // Function for counter animation
   const animateCounter = () => {
     element.innerText = count;
     count++;
