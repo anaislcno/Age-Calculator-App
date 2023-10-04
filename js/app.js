@@ -202,10 +202,7 @@ const calculateTotal = () => {
 
   // Date provided
   const inputDate = new Date(year, month - 1, day);
-  // Preferred method; never interprets any value as being a relative offset,
-  // but instead uses the year value as-is
   inputDate.setFullYear(yearEl.value.trim());
-  // now: 98 is 98 (not 1998)
 
   // Current date
   const currentDate = new Date();
@@ -236,7 +233,33 @@ const calculateTotal = () => {
     document.getElementById("result__year").textContent = resultYears;
     document.getElementById("result__month").textContent = resultMonths;
     document.getElementById("result__day").textContent = resultDays;
+
+    applyAnimation("result__year", resultYears);
+    applyAnimation("result__month", resultMonths);
+    applyAnimation("result__day", resultDays);
   }
+};
+
+// Animation
+
+const applyAnimation = (elementId, result) => {
+  const element = document.getElementById(elementId);
+
+  let count = 0;
+  const interval = 30; // Durée de chaque incrémentation en millisecondes
+  const maxCount = result; // La valeur à atteindre
+
+  // La fonction pour animer le compteur
+  const animateCounter = () => {
+    element.innerText = count;
+    count++;
+
+    if (count <= maxCount) {
+      setTimeout(animateCounter, interval);
+    }
+  };
+
+  animateCounter();
 };
 
 // Submit function

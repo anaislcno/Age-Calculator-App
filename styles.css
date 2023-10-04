@@ -167,6 +167,20 @@ span {
   letter-spacing: 5px;
 }
 
+/* Animation  */
+
+#result__year {
+  animation: counter_result__year 5s linear infinite alternate;
+}
+
+#result__month {
+  animation: counter_result__month 5s linear infinite alternate;
+}
+
+#result__day {
+  animation: counter_result__day 5s linear infinite alternate;
+}
+
 /* Attribution */
 
 .attribution {
